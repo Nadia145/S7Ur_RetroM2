@@ -1,25 +1,31 @@
 # Nadia Paola Ferro Gallegos - A01752013
 
+import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-import numpy as np
-from decision_tree import DecisionTree
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+from knn import KNN
 
-data = datasets.load_breast_cancer()
-X, y = data.data, data.target
+cmap = ListedColormap(['#FF0000', '#00FF00', '#0000FF'])
 
+iris = datasets.load_iris()  # Se carga el conjunto de datos
+X, y = iris.data, iris.target
+
+# Se divide el conjunto de datos en conjuntos de entrenamiento
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=1234
-)
+    X, y, test_size=0.2, random_state=1234)
 
-clf = DecisionTree(max_depth=10)
+plt.figure()
+plt.scatter(X[:, 2], X[:, 3], c=y, cmap=cmap, edgecolor='k', s=20)
+plt.show()
+
+
+clf = KNN(k=5)
 clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
 
+print(predictions)
 
-def accuracy(y_test, y_pred):
-    return np.sum(y_test == y_pred) / len(y_test)
-
-
-acc = accuracy(y_test, predictions)
+acc = np.sum(predictions == y_test) / len(y_test)
 print(acc)
