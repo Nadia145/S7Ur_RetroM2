@@ -14,8 +14,7 @@ cancer = datasets.load_breast_cancer()
 X, y = cancer.data, cancer.target
 
 # Se crea un mapa de colores para las etiquetas
-cmap = ListedColormap(['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF',
-                       '#00FFFF', '#FFA500', '#A52A2A', '#808080', '#008000'])
+cmap = ListedColormap(['#FF0000', '#00FF00'])
 
 # Se visualiza el conjunto de datos
 plt.figure()

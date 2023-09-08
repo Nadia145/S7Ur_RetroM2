@@ -20,7 +20,8 @@ def euclidean_distance(x1, x2):
         x1: (numpy.array): Primer punto.
         x2: (numpy.array): Segundo punto.
 
-        Returns: float la distancia euclidiana entre x1 y x2.
+        Returns:
+            float: la distancia euclidiana entre x1 y x2.
     """
     distance = np.sqrt(np.sum((x1-x2)**2))
     return distance
