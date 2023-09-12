@@ -1,17 +1,13 @@
 # Nadia Paola Ferro Gallegos - A01752013
 # Se importan las bibliotecas necesarias
-from sklearn.model_selection import GridSearchCV
 import numpy as np
-from sklearn import datasets
-from sklearn.base import BaseEstimator, ClassifierMixin
-from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
-from knn import KNN
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn import datasets
+from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
 from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 
 # Se carga el conjunto de datos
 # Iris Dataset - Clasificacion Multiclase
@@ -62,7 +58,7 @@ plt.ylabel('Caracteristica y')
 plt.show()
 
 # Crear y entrenar el modelo KNN
-clf = KNN(k=5)
+clf = KNeighborsClassifier(n_neighbors=5)
 clf.fit(X_train, y_train)
 
 # Realizar predicciones en el conunto de entrenamiento
@@ -133,7 +129,7 @@ f1_scores = []
 # Utilizamos los hiperparametros en el modelo
 for k in k_values:
     # Crear y entrenar el modelo KNN
-    temporary_model = KNN(k=k)
+    temporary_model = KNeighborsClassifier(n_neighbors=k)
     temporary_model.fit(X_train, y_train)
 
     # Realizar predicciones en el conjunto de validacion
@@ -168,7 +164,7 @@ plt.grid(True)
 plt.show()
 
 # Se entrena el modelo final con todos los datos de entrenamiento utilizando el mejor valor de k encontrado
-modelo_final = KNN(k=best_k)
+modelo_final = KNeighborsClassifier(n_neighbors=best_k)
 modelo_final.fit(X_train, y_train)
 
 # Se realizan predicciones en datos de prueba (sin usar el conjunto de validacion)
@@ -201,7 +197,7 @@ X_val_scaled = scaler.transform(X_val)
 X_test_scaled = scaler.transform(X_test)
 
 # Entrena el modelo KNN con los conjuntos de datos escalados
-clf = KNN(k=5)
+clf = KNeighborsClassifier(n_neighbors=5)
 clf.fit(X_train_scaled, y_train)
 
 # Realiza predicciones en los conjuntos de validación y prueba escalados
@@ -221,7 +217,7 @@ grid_search.fit(X_train_scaled, y_train)
 
 # Obtener el mejor valor de 'k' y entrenar el modelo con él
 best_k = grid_search.best_params_['n_neighbors']
-clf = KNN(k=best_k)
+clf = KNeighborsClassifier(n_neighbors=best_k)
 clf.fit(X_train_scaled, y_train)
 
 # Escalar características
